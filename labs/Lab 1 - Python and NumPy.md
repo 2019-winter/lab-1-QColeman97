@@ -14,7 +14,7 @@ jupyter:
 ---
 
 # Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+Quinn Coleman
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -36,7 +36,7 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+**YOUR ANSWER HERE** - later
 
 
 ## Exercises 1-7
@@ -46,46 +46,69 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+
+a = np.full((6, 4), 2)
+a
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.ones((6, 4), dtype=int)
+np.fill_diagonal(b, 3)
+b
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+a * b
+# np.dot(a,b)
 ```
+
+- dot(a,b) doesn't work because that is a dot product that requires matrices a and b to have aligned dimensions.
+- a * b works because that is an element-wise multiplication and matrices a and b have the same dimensions.
+
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+a
+a.transpose()
+b
+b.transpose()
+display(np.dot(a.transpose(), b))
+np.dot(a, b.transpose())
 ```
+
+The shapes are different because they are results of different dot products.
+
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def cool_func():
+    print('This is a pretty cool function')
+    
+cool_func()
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+def do_matrix_stuff():
+    a = np.random.rand(3,4)
+    b = np.random.rand(2,5)
+    print('Sum of a:', a.sum())
+    
+do_matrix_stuff()
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+
 ```
 
 ## Excercises 8-???
