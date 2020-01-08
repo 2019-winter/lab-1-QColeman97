@@ -100,7 +100,12 @@ cool_func()
 def do_matrix_stuff():
     a = np.random.rand(3,4)
     b = np.random.rand(2,5)
-    print('Sum of a:', a.sum())
+    print('Sum of a:', np.sum(a)) 
+    print('Sum of b:', b.sum()) # Same op - Python built-in
+    print('Mean of a:', np.mean(b))
+    print('Mean of b:', b.mean()) # Same op - Python built-in
+    print('Median of a:', np.median(a))
+    print('Median of b:', np.median(b)) # No Python built-in
     
 do_matrix_stuff()
 ```
@@ -108,7 +113,13 @@ do_matrix_stuff()
 ## Exercise 7
 
 ```python
+def count_ones(array):
+    return np.array([1 if elem == 1 else 0 for elem in list(array)]).sum()
+         
+a = np.arange(9)
 
+display(count_ones(a))
+np.sum(np.where(a == 1, 1, 0))
 ```
 
 ## Excercises 8-???
