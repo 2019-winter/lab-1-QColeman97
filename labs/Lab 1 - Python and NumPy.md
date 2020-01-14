@@ -67,7 +67,7 @@ a * b
 # np.dot(a,b)
 ```
 
-- dot(a,b) doesn't work because that is a dot product that requires matrices a and b to have aligned dimensions.
+- dot(a,b) doesn't work because that is a dot product that requires matrices a and b to have equal inner dimensions.
 - a * b works because that is an element-wise multiplication and matrices a and b have the same dimensions.
 
 
@@ -114,9 +114,15 @@ do_matrix_stuff()
 
 ```python
 def count_ones(array):
-    return np.array([1 if elem == 1 else 0 for elem in list(array)]).sum()
+    counter = 0
+    for i in range(array.shape[0]):
+        for j in range(array.shape[1]):
+            if array[i,j] == 1:
+                counter += 1
+    return counter
+
          
-a = np.arange(9)
+a = np.arange(9).reshape(3,3)
 
 display(count_ones(a))
 np.sum(np.where(a == 1, 1, 0))
@@ -130,28 +136,53 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+import pandas as pd
+
+a_matrix = np.full((6, 4), 2)
+a = pd.DataFrame(a_matrix)
+a
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+b_matrix = np.ones((6, 4), dtype=int)
+b_matrix[np.arange(4), np.arange(4)] = 3
+b = pd.DataFrame(b_matrix)
+b
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+a * b
+# a.dot(b)
 ```
+
+The same results happen, for the same reasons as with the numpy array implementation:
+- dot(a,b) doesn't work because that is a dot product that requires matrices a and b to have equal inner dimensions.
+- a * b works because that is an element-wise multiplication and matrices a and b have the same dimensions.
+
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+# Can use np.where or pd.where
+def count_ones(dataframe):
+    counter = 0
+    for i in range(dataframe.shape[0]):
+        for j in range(dataframe.shape[1]):
+            if dataframe.iloc[i,j] == 1:
+                counter += 1
+    return counter
+
+a = pd.DataFrame(np.arange(9).reshape(3,3))
+
+display(count_ones(a))
+a.where(a == 1, 0).sum().sum()
 ```
 
 ## Exercises 12-14
@@ -161,7 +192,7 @@ Now let's look at a real dataset, and talk about ``.loc``. For this exercise, we
 titanic_df = pd.read_csv(
     "https://raw.githubusercontent.com/dlsun/data-science-book/master/data/titanic.csv"
 )
-titanic_df
+titanic_df.head()
 ```
 
 Notice how we have nice headers and mixed datatypes? That is one of the reasons we might use Pandas. Please refresh your memory by looking at the 10 minutes to Pandas again, but then answer the following.
@@ -171,24 +202,21 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.name
 ```
 
 ## Exercise 13
 After setting the index to ``sex``, how do you select all passengers that are ``female``? And how many female passengers are there?
 
 ```python
-## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+len(titanic_df.loc['female'])
 ```
 
 ## Exercise 14
 How do you reset the index?
 
 ```python
-## YOUR SOLUTION HERE
-```
-
-```python
-
+titanic_df.reset_index(inplace=True)
+titanic_df.head()
 ```
